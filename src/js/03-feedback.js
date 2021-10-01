@@ -6,8 +6,7 @@ let data = {};
 
 const fillData = function () {
   const savedData = localStorage.getItem('feedback-form-state');
-  const parseData = JSON.parse(savedData);
-  data = parseData;
+  data = JSON.parse(savedData) || {};
   const keys = Object.keys(data);
   keys.forEach(key => {
     const input = formRef.elements[key];
@@ -33,5 +32,6 @@ const onSubmit = function (e) {
   data = {};
   localStorage.removeItem('feedback-form-state');
 };
+
 formRef.addEventListener('input', throttle(onInput, 500));
 formRef.addEventListener('submit', onSubmit);
